@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Play - Teddy Tunes & Threads</title>
+
+  <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+  <header>
+
+    🧸 Fuzzy Friends Workshop – About Us 🎶
+
+    <button class="language-toggle" id="langBtn" onclick="toggleLanguage()">বাংলা</button>
+
+    <nav>
+      <a href="index.html" data-translate="navHome">Home</a>
+      <a href="band.html" data-translate="navBand">Teddy Band</a>
+      <a href="merchandise.html" data-translate="navMerchandise">Merchandise</a>
+      <a href="about.html" data-translate="navAbout">About</a>
+      <a href="parents.html" data-translate="navParents">Parental Zone</a>
+    </nav>
+  </header>
+
+
+
+  <main>
+
+    <h2>Dress Up Your Teddy!</h2>
+
+    <p>Change outfits, choose music, and see your teddy move!</p>
+
+
+
+    <img id="teddy" src="teddy-default.png" alt="Teddy Bear">
+
+
+
+    <div class="controls">
+
+      <label>Choose Outfit:</label>
+
+      <select id="outfit">
+
+        <option value="default">Classic</option>
+
+        <option value="kurta">Festive Kurta (Puja)</option>
+
+        <option value="saree">Traditional Saree</option>
+
+        <option value="party">Party Outfit</option>
+
+      </select>
+
+
+
+      <label>Pick Mood:</label>
+
+      <select id="mood">
+
+        <option value="happy">😊 Happy</option>
+
+        <option value="sleepy">😴 Sleepy</option>
+
+        <option value="energetic">💃 Energetic</option>
+
+        <option value="calm">🌙 Calm</option>
+
+        <option value="festive">🏵️ Puja Time</option>
+
+      </select>
+
+    </div>
+
+
+
+    <audio id="music" controls loop style="display:none;"></audio>
+
+    <audio id="voice" src="assets/guide.mp3"></audio>
+
+
+
+    <p><a href="band.html" style="color:#e91e63; font-weight:bold;">🎸 Try Teddy Band Mode →</a></p>
+
+  </main>
+
+
+
+  <footer>
+
+    <p data-translate="footer">Made with ❤️ for kids in Kolkata, India</p>
+
+  </footer>
+
+
+
+  <script src="script.js"></script>
+
+  <script>
+
+    const teddy = document.getElementById('teddy');
+
+    const outfit = document.getElementById('outfit');
+
+    const mood = document.getElementById('mood');
+
+    const music = document.getElementById('music');
+
+    const voice = document.getElementById('voice');
+
+
+
+    const outfits = {
+
+      default: "assets/teddy-default.png",
+
+      kurta: "assets/teddy-kurta.png",
+
+      saree: "assets/teddy-saree.png",
+
+      party: "assets/teddy-party.png"
+
+    };
+
+
+
+    const musicTracks = {
+
+      happy: "assets/beat.mp3",
+
+      sleepy: "assets/lullaby.mp3",
+
+      energetic: "assets/beat.mp3",
+
+      calm: "assets/lullaby.mp3",
+
+      festive: "assets/puja.mp3"
+
+    };
+
+
+
+    const backgrounds = {
+
+      happy: "assets/background-happy.jpg",
+
+      sleepy: "assets/background-night.jpg",
+
+      energetic: "assets/background-park.jpg",
+
+      calm: "assets/background-night.jpg",
+
+      festive: "assets/background-puja.jpg"
+
+    };
+
+
+
+    function applyCustomization() {
+
+      teddy.src = outfits[outfit.value];
+
+      const currentMood = mood.value;
+
+      document.body.style.backgroundImage = `url('${backgrounds[currentMood]}')`;
+
+      music.src = musicTracks[currentMood];
+
+      music.style.display = "block";
+
+      music.play();
+
+
+
+      teddy.className = '';
+
+      if (currentMood === 'happy') teddy.classList.add('animate-bounce');
+
+      if (currentMood === 'sleepy') teddy.classList.add('animate-sway');
+
+      if (currentMood === 'energetic' || currentMood === 'festive') teddy.classList.add('animate-dance');
+
+    }
+
+
+
+    outfit.addEventListener('change', () => {
+
+      localStorage.setItem('teddyOutfit', outfit.value);
+
+      applyCustomization();
+
+    });
+
+
+
+    mood.addEventListener('change', () => {
+
+      localStorage.setItem('teddyMood', mood.value);
+
+      applyCustomization();
+
+    });
+
+
+
+    window.addEventListener('load', () => {
+
+      const savedOutfit = localStorage.getItem('teddyOutfit');
+
+      const savedMood = localStorage.getItem('teddyMood');
+
+      if (savedOutfit) outfit.value = savedOutfit;
+
+      if (savedMood) mood.value = savedMood;
+
+      applyCustomization();
+
+      voice.play();
+
+    });
+
+  </script>
+
+</body>
+
+</html>
