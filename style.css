@@ -122,7 +122,7 @@ audio {
   bottom: 20px;
   right: 20px;
   font-size: 60px;
-  animation: float 3s ease-in-out infinite;
+  animation: float 15s ease-in-out infinite;
   z-index: 9999;
   cursor: default;
 }
