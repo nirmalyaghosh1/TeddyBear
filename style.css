@@ -170,7 +170,7 @@ audio {
   bottom: 20px;
  left: 20px;
   font-size: 60px;
-  animation: float 3s ease-in-out infinite, spin 6s linear infinite;
+  animation: float 15s ease-in-out infinite, spin 6s linear infinite;
 }
 
 @keyframes spin {
